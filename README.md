@@ -6,13 +6,13 @@ These files contain the work I have done to the XV6 operating system to practice
 
 ADDED FUNCTIONALITIES:
 ---
-1. I have created new system call called "exit" which stores an exit status once a process is terminated. This exit call returns 0 when the process terminated succesfully and -1 when there has been an error.
+1. I have created new system call called "exit" which stores an exit status once a process is terminated. This exit call returns 0 when the process terminates succesfully and -1 when there has been an error.
 2. I have created a "waitpid" system call which is a blocking waitpid where the kernel prevents the current process from execution until a process with the given pid terminates. The waitpid returns the pid of the process that was terminated or a -1 when the process does not exit or if an unexpected error occured.
 3. Implementing these two system calls required modifications to many pre-existing functions to support the new exit status.
 
 ADDED FUNCTIONALITIES:
 ---
-I implemented a priority scheduler by modifying the pre-existing round-robin scheduler. Each process has a priority value ranging from 31-0 with 0 being the highest priority. A process is able to change priority at anytime. I have avoided starvation by implementing aging priority, where each unfinished process increases in priority once the scheduler has iterated through the schedule table once. I have also implemented priority inheritence, where a child process will have the same priority as the parent process after forking.
+I implemented a priority scheduler by modifying the pre-existing round-robin scheduler. Each process has a priority value ranging from 31-0 with 0 being the highest priority. A process is able to change priority at anytime. I have avoided starvation by implementing aging priority, where each unfinished process increases in priority once the scheduler has iterated through the scheduling table once. I have also implemented priority inheritence, where a child process will have the same priority as the parent process after forking.
 
 ADDED FUNCTIONALITIES:
 ---
@@ -20,4 +20,8 @@ I have changed the user memory layout of XV6 to allow a heap to grow towards the
 
 ADDED FUNCTIONALITIES:
 ---
-I have implemented support to enable two processed to share a memory page. I have created a new system call: shm_open, which allows a program to fork and then have both processes open a shared memory segment. Shm_open utilizes a pointer to the shared memory address so we are able to access this shared memory page. This allows threading to be implemented. I have had to create a user level spin lock to prevent race-conditions by implementing the function: uspinlock. 
+I have implemented support to enable two processes to share a memory page. I have created a new system call: shm_open, which allows a program to fork and then have both processes open a shared memory segment. Shm_open utilizes a pointer to the shared memory address so we are able to access this shared memory page. This allows threading to be implemented. I have had to create a user level spin lock to prevent race-conditions by implementing the function: uspinlock. 
+
+LANQUAGE:
+---
+C
